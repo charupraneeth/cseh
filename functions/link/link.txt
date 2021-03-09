@@ -1,0 +1,1 @@
+https://github.com/mraerino/netlify-functions-readfile/tree/main/lambda/hello-world
