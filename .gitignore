@@ -1,2 +1,5 @@
 # Local Netlify folder
 .netlify
+
+node_modules
+functions/cseh-db6c9c2f2cc2.json

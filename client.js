@@ -53,38 +53,41 @@ function moved(e) {
   // pointer.style.left = coords.x + "px";
 }
 
-// link display
-async function displayLink() {
+function decide() {
+  const toRead = confirm("click OK to read the link and cancel to edit");
+  if (toRead) {
+    displayLink();
+    return;
+  }
+  const toEdit = confirm("do you want to edit the link ?");
+  const inputLink = prompt("enter the link?");
+  if (!inputLink || !inputLink.trim()) {
+    alert("invalid link");
+    return;
+  }
+  if (toEdit) {
+    displayLink(inputLink);
+  }
+}
+
+//display link
+async function displayLink(link = "") {
   try {
-    const response = await fetch("/.netlify/functions/link");
-    const link = await response.text();
-    if (link) {
-      const isEdit = confirm(
-        "link already exists , click OK to edit the existing link and CANCEL to show the link"
-      );
-      if (!isEdit) {
-        const clipBoardElement = document.createElement("input");
-        document.body.append(clipBoardElement);
-        clipBoardElement.value = link;
-        clipBoardElement.select();
-        clipBoardElement.setSelectionRange(0, 99999); /* For mobile devices */
-        document.execCommand("copy");
-        clipBoardElement.remove();
-        alert(`copied the link to clipboard:\n${link}`);
-      } else {
-        const inputLink = prompt("enter the link :");
-        if (!inputLink.trim()) return;
-        const response = await fetch(
-          "/.netlify/functions/link?link=" + inputLink
-        );
-        const responseText = await response.text();
-        if (response.status == 200) {
-          alert("link updated successfully");
-        } else {
-          alert("link not updated");
-        }
-      }
+    if (!link) {
+      const response = await fetch("/.netlify/functions/link");
+      const json = await response.json();
+      console.log(json);
+
+      await navigator.clipboard.writeText(json.data);
+      alert(`link copied to clipboard\nlink is : \n ${json.data}`);
+      return;
     }
+    const submissionResponse = await fetch(
+      `/.netlify/functions/link?inputLink=${link}`
+    );
+    const submissionJSON = await submissionResponse.json();
+    console.log(submissionJSON);
+    alert(`link is : \n ${submissionJSON.message}`);
   } catch (error) {
     console.log(error);
     alert(error.message || "failed to access link");
@@ -100,5 +103,5 @@ function setEmoji(emoji) {
 }
 
 links.forEach((link) => {
-  link.addEventListener("click", displayLink);
+  link.addEventListener("click", decide);
 });
