@@ -1,5 +1,5 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const credentials = require("./service-account.json"); // load your service account here
+const credentials = require("../service-account.json"); // load your service account here
 
 // your google sheet id
 // if the google sheet link is https://docs.google.com/spreadsheets/d/L98bhyT89rpaigXdeW44x1EZb-4M43teKT2QGPnI7b3Y/edit#gid=0
