@@ -1,6 +1,11 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const credentials = require("../cseh-db6c9c2f2cc2.json");
-const sheetId = "1Rvvs-1Q4w4B5rq4LeyrCJcrVpBloTcgB3FEw4lUhOy8";
+const credentials = require("./service-account.json"); // load your service account here
+
+// your google sheet id
+// if the google sheet link is https://docs.google.com/spreadsheets/d/L98bhyT89rpaigXdeW44x1EZb-4M43teKT2QGPnI7b3Y/edit#gid=0
+// L98bhyT89rpaigXdeW44x1EZb-4M43teKT2QGPnI7b3Y is the required id
+
+const sheetId = process.env.GOOGLE_SHEET_ID; // set this variable in a .env file
 exports.handler = async (event, context) => {
   const { inputLink } = event.queryStringParameters;
   console.log(inputLink);
@@ -10,6 +15,8 @@ exports.handler = async (event, context) => {
     await doc.loadInfo();
     const sheet = doc.sheetsById[0];
     const rows = await sheet.getRows();
+
+    // update the previous link in the sheets
     if (inputLink) {
       rows[0]["pqt-class-link"] = inputLink;
       await rows[0].save();
@@ -21,6 +28,8 @@ exports.handler = async (event, context) => {
         }),
       };
     }
+
+    // respond with saved link
     const link = rows[0]["pqt-class-link"];
     if (link)
       return {

@@ -60,14 +60,14 @@ function decide() {
     return;
   }
   const toEdit = confirm("do you want to edit the link ?");
+  if (!toEdit) return;
+
   const inputLink = prompt("enter the link?");
   if (!inputLink || !inputLink.trim()) {
     alert("invalid link");
     return;
   }
-  if (toEdit) {
-    displayLink(inputLink);
-  }
+  displayLink(inputLink);
 }
 
 //display link
@@ -95,12 +95,12 @@ async function displayLink(link = "") {
 }
 
 // setting emoji
-function setEmoji(emoji) {
-  if (emoji.match(emojiRegex)) {
-    console.log("its an emoji");
-    document.getElementById("pointer").innerHTML = emoji;
-  } else console.log("not an emoji");
-}
+// function setEmoji(emoji) {
+//   if (emoji.match(emojiRegex)) {
+//     console.log("its an emoji");
+//     document.getElementById("pointer").innerHTML = emoji;
+//   } else console.log("not an emoji");
+// }
 
 links.forEach((link) => {
   link.addEventListener("click", decide);
