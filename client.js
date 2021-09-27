@@ -2,23 +2,24 @@
 const weekDay = document.querySelectorAll(".row");
 // const pointer = document.getElementById("pointer");
 const links = document.querySelectorAll(".link");
-const emojiRegex = /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
+const emojiRegex =
+  /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
 // add 2 to weekDay for compensating additional rows
 function getCurrentPeriod(hour, minutes) {
   // const lastPeriodStart = new Date().setHours(14, 30, 0);
   // const lastPeriodEnd = new Date().setHours(15, 30, 0);
   // const currenTime = new Date().setHours(hour, minutes, 0);
-  if (hour == 9 && minutes <= 50) return 1;
-  else if ((hour == 9 && minutes <= 59) || (hour == 10 && minutes <= 40))
+  if (hour == 8 && minutes <= 50) return 1;
+  else if ((hour == 8 && minutes <= 59) || (hour == 9 && minutes <= 40))
     return 2;
-  else if ((hour == 10 && minutes <= 59) || (hour == 11 && minutes <= 40))
+  else if ((hour == 9 && minutes <= 59) || (hour == 10 && minutes <= 40))
     return 3;
-  else if ((hour == 11 && minutes <= 59) || (hour == 12 && minutes <= 30))
+  else if ((hour == 10 && minutes <= 40) || (hour == 11 && minutes <= 30))
     return 4;
-  else if ((hour == 13 && minutes <= 59) || (hour == 14 && minutes <= 10))
+  else if ((hour == 12 && minutes <= 59) || (hour == 13 && minutes <= 10))
     return 5;
-  else if (hour == 14 && minutes <= 59) return 6;
-  else if (hour == 15) return 7;
+  else if (hour == 13 && minutes <= 59) return 6;
+  else if (hour == 14) return 7;
 }
 
 function setDate() {
